@@ -1,0 +1,33 @@
+{{#extends "base"}}
+{{#block "content"}}
+<h1>Customers</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Rating</th>
+            <th>Company</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each customers}}
+        <tr>
+            <td>{{first_name}}</td>
+            <td>{{last_name}}</td>
+            <td>{{rating}}</td>
+            <td>{{company_name}}</td> <!-- Adjusted to match the SQL alias -->
+             <td>
+                <a href="/customers/{{customer_id}}/edit" class="btn btn-primary btn-sm">Edit</a>
+                <a href="/customers/{{customer_id}}/delete" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        </tr>
+
+        {{/each}}
+    </tbody>
+</table>
+<a href="/customers/create">Add New Customer</a>
+{{/block}}
+{{/extends}}

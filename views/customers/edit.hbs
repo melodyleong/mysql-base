@@ -1,0 +1,40 @@
+{{#extends "base"}}
+{{#block "content"}}
+<h1>Edit Customer</h1>
+{{!--  action="/customers/{{customer.customer_id}}" --}}
+<form method="POST">
+    <div class="mb-3">
+        <label>First Name</label>
+        <input type="text" class="form-control" name="first_name" value="{{customer.first_name}}">
+    </div>
+    <div class="mb-3">
+        <label>Last Name</label>
+        <input type="text" class="form-control" name="last_name" value="{{customer.last_name}}">
+    </div>
+    <div class="mb-3">
+        <label>Rating</label>
+        <input type="text" class="form-control" name="rating" value="{{customer.rating}}">
+    </div>
+    <div class="mb-3">
+        <label>Company</label>
+        <select name="company_id" class="form-control">
+            {{#each companies}}
+            <option value="{{company_id}}" {{#if (eq company_id ../customer.company_id)}}selected{{/if}}>{{name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Employees</label>
+        <select name="employee_id" class="form-control" multiple>
+            {{#each employees}}
+            <option value="{{employee_id}}"
+                {{#if (inArray employee_id ../relatedEmployees)}}selected{{/if}}>
+                {{first_name}} {{last_name}}
+            </option>
+            {{/each}}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Customer</button>
+</form>
+{{/block}}
+{{/extends}}

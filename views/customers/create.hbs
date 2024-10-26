@@ -1,0 +1,36 @@
+{{#extends "base"}}
+{{#block "content"}}
+<h1>Create a New Customer</h1>
+<form action="/customers/create" method="POST">
+    <div class="mb-3">
+        <label>First Name</label>
+        <input type="text" name="first_name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Last Name</label>
+        <input type="text" name="last_name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Rating</label>
+        <input type="number" name="rating" class="form-control" min="1" max="5" required>
+    </div>
+    <div class="mb-3">
+        <label>Company</label>
+        <select name="company_id" class="form-control" required>
+            {{#each companies}}
+            <option value="{{company_id}}">{{name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Employees</label>
+        <select name="employee_id" class="form-control" multiple>
+            {{#each employees}}
+            <option value="{{employee_id}}">{{first_name}} {{last_name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Customer</button>
+</form>
+{{/block}}
+{{/extends}}
