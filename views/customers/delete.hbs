@@ -3,16 +3,13 @@
 {{#block "title"}}Delete Customer{{/block}}
 
 {{#block "content"}}
-<form method="POST">
-    <div class="alert alert-danger">
-        Are you sure you want to delete {{customer.first_name}} {{customer.last_name}}
-        <div>
-            <input type="submit" value="Confirm" class="btn btn-danger"/>
-            <a href="/customers" class="btn btn-primary">Cancel</a>
-        </div>
-    </div>
+<h1>Delete Customer</h1>
+<p>Are you sure you want to delete {{customer.first_name}} {{customer.last_name}}?</p>
+
+<form method="POST" action="/customers/{{customer.customer_id}}/delete">
+    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+    <a href="/customers" class="btn btn-secondary">Cancel</a>
 </form>
 
 {{/block}}
-
 {{/extends}}

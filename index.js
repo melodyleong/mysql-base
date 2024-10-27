@@ -147,6 +147,21 @@ app.post('/customers/create', async (req, res) => {
     })
     
 
+    
+    app.get('/customers/:customer_id/delete', async function(req,res){
+        // display a confirmation form 
+        const [customers] = await connection.execute(
+            "SELECT * FROM Customers WHERE customer_id =?", [req.params.customer_id]
+        );
+        const customer = customers[0];
+
+        res.render('customers/delete', {
+            customer
+        })
+
+    })
+
+
     //delete
     app.post('/customers/:customer_id/delete', async function(req, res){
         await connection.execute(`DELETE FROM Customers WHERE customer_id = ?`, [req.params.customer_id]);
