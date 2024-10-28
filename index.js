@@ -164,9 +164,16 @@ app.post('/customers/create', async (req, res) => {
 
     //delete
     app.post('/customers/:customer_id/delete', async function(req, res){
-        await connection.execute(`DELETE FROM Customers WHERE customer_id = ?`, [req.params.customer_id]);
-        res.redirect('/customers');
-    })
+        try {
+            await connection.execute(`DELETE FROM EmployeeCustomer WHERE customer_id = ?`, [req.params.customer_id]);
+            await connection.execute(`DELETE FROM Customers WHERE customer_id = ?`, [req.params.customer_id]);
+            res.redirect('/customers');
+        } catch (error) {
+            console.error("Error deleting customer:", error);
+            res.status(500).send("An error occurred while deleting the customer.");
+        }
+    });
+    
 
 
     // Start the server
